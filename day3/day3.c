@@ -55,7 +55,6 @@ int get_badge_val (char* line_1, char* line_2, char* line_3) {
 int main () {
     int p1_total = 0;
     int p2_total = 0;
-    size_t n = 1;
     char buf[BUFLEN] = "";
     FILE *fp = fopen ("input.txt", "r");
 
