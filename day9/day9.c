@@ -57,16 +57,9 @@ int main() {
 
     char buf[BUFLEN] = "";
     FILE *fp = fopen ("input.txt", "r");
-    
-    // get length of input
-    int c = 0;
-    while (fgets (buf, BUFLEN, fp))
-        ++c;
-    rewind(fp);
 
     int rope_len = 2;
     int rope2_len = 10; // added for part 2
-
 
     struct point* rope[rope_len];
     for (int i = 0; i < rope_len;  i++) {
