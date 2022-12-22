@@ -22,9 +22,8 @@ void print_monkey (int mnum, struct monkey* monkeys[]) {
     monkey *m = monkeys[mnum];
     printf("Monkey %d:\n", mnum);
     printf("\tstarting items: ");
-    for (int i = 0; m -> items[i] != 0; i++) {
+    for (int i = 0; m -> items[i] != 0; i++)
         printf("%ld  ", m -> items[i]);
-    }
     printf("\tnum items: %d\n", m -> num_items);
     printf("\toperator: %c\n", m -> operator);
     printf("\toperand: %d\n", m -> operand);
@@ -38,9 +37,8 @@ void throw(int idx, long w, int sm, int dm, struct monkey* monkeys[]) {
     monkeys[dm] -> items[next] = w;
     // yes i know this is inefficient
     int sli = --monkeys[sm] -> num_items;
-    for (int i = idx; i < sli; i++) {
+    for (int i = idx; i < sli; i++)
         monkeys[sm] -> items[i] = monkeys[sm] -> items[i+1];
-    }
     monkeys[sm] -> items[sli] = 0;
 }
 
@@ -50,11 +48,10 @@ void monkeytime(int mnum, int wrf, int lcm, struct monkey* monkeys[]) {
     while (m -> items[0] != 0) {
         long item = m -> items[0];
         long op;
-        if (m -> operand == -1) {
+        if (m -> operand == -1)
             op = item;
-        } else {
+        else 
             op = m -> operand;
-        }
         m -> icount += 1;
         if (m -> operator == '+')
             w = (item + op) / wrf;
@@ -107,9 +104,8 @@ int sortCmp (const void * a, const void * b) {
 unsigned long monkeybiz(struct monkey* monkeys[]) {
     // return the product of the two highest inspection counts
     int icounts[NUM_MONKEYS];
-    for (int i = 0; i < NUM_MONKEYS; i++) {
+    for (int i = 0; i < NUM_MONKEYS; i++)
         icounts[i] = monkeys[i] -> icount;
-    } 
     qsort(icounts, NUM_MONKEYS, sizeof(int), sortCmp);
     return (unsigned long)icounts[0] * (unsigned long)icounts[1];
 }
@@ -125,11 +121,9 @@ int main () {
     for (i = 0; i < NUM_MONKEYS; i++)
         lcm = lcm * monkeys[i] -> testval;
 
-    for (int i = 0; i < ROUNDS_P1; i++) {
-        for (int j = 0; j < NUM_MONKEYS; j++) {
+    for (int i = 0; i < ROUNDS_P1; i++)
+        for (int j = 0; j < NUM_MONKEYS; j++)
             monkeytime(j, 3, lcm, monkeys);
-        }
-    }
     printf("Part one answer: %ld\n", monkeybiz(monkeys));
     free(monkeys);
 
@@ -137,11 +131,10 @@ int main () {
     *monkeys = malloc(NUM_MONKEYS * sizeof *monkeys);
     setup(monkeys);
 
-    for (int i = 0; i < ROUNDS_P2; i++) {
-        for (int j = 0; j < NUM_MONKEYS; j++) {
+    for (int i = 0; i < ROUNDS_P2; i++)
+        for (int j = 0; j < NUM_MONKEYS; j++)
             monkeytime(j, 1, lcm, monkeys);
-        }
-    }
+
     printf("Part two answer: %ld\n", monkeybiz(monkeys));
     return 0;
 }
